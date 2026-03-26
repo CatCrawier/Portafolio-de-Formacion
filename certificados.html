@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Adrian Vasquez Perez" />
+  <title>Certificados - Adrián Vásquez Pérez</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="certificados.css" />
+</head>
+<body>
+  <header>
+    <p class="etiqueta-encabezado">Portafolio de formación</p>
+    <h1>Adrián Vásquez Pérez</h1>
+    <p class="subtitulo-encabezado">Certificados de cursos completados - 2026</p>
+    <div class="divisor"></div>
+  </header>
+
+  <div class="rejilla" id="galeria"></div>
+
+  <div class="superposicion-modal" id="modal">
+    <div class="contenido-modal">
+      <div class="encabezado-modal">
+        <div class="info-encabezado-modal">
+          <div class="fuente-encabezado-modal" id="fuente-modal"></div>
+          <div class="titulo-modal" id="titulo-modal"></div>
+        </div>
+        <button class="cerrar-modal" type="button" onclick="cerrarModal()" aria-label="Cerrar visor">X</button>
+      </div>
+
+      <div class="cuerpo-modal">
+        <iframe
+          id="pdf-modal"
+          class="visor-pdf visor-pdf-modal"
+          title="Vista previa del certificado"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <div class="pie-modal">
+        <span id="meta-modal"></span>
+        <div class="acciones-modal">
+          <a id="descargar-modal" class="boton-enlace" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
+          <div class="navegacion-modal">
+            <button class="boton-navegacion" type="button" onclick="navegar(-1)" aria-label="Certificado anterior">&larr;</button>
+            <button class="boton-navegacion" type="button" onclick="navegar(1)" aria-label="Certificado siguiente">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="certificados.js"></script>
+</body>
+</html>
