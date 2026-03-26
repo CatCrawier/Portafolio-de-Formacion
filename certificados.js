@@ -1,5 +1,26 @@
 const certificados = [
   {
+    title: "Fundamentos de JavaScript",
+    source: "Platzi x CESDE",
+    hours: "Horas no especificadas",
+    date: "26 mar 2026",
+    file: "Fundamentos_JS.pdf"
+  },
+  {
+    title: "Jira",
+    source: "Platzi x CESDE",
+    hours: "Horas no especificadas",
+    date: "26 mar 2026",
+    file: "Jira.pdf"
+  },
+  {
+    title: "Programacion Basica",
+    source: "Platzi x CESDE",
+    hours: "Horas no especificadas",
+    date: "26 mar 2026",
+    file: "Programacion_Basica.pdf"
+  },
+  {
     title: "Visualización de Datos para BI",
     source: "Platzi x CESDE",
     hours: "13 horas",

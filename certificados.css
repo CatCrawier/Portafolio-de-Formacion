@@ -126,7 +126,8 @@ header h1 {
 }
 
 .visor-pdf-tarjeta {
-  height: 340px;
+  height: auto;
+  aspect-ratio: 1.414 / 1;
   border-radius: 12px 12px 0 0;
   pointer-events: none;
 }
@@ -347,7 +348,7 @@ header h1 {
   header { padding: 40px 20px 28px; }
   .rejilla { padding: 24px 16px 60px; gap: 16px; }
   .marco-miniatura { padding: 14px 14px 0; }
-  .visor-pdf-tarjeta { height: 280px; }
+  .visor-pdf-tarjeta { aspect-ratio: 1.414 / 1; }
   .cuerpo-modal { padding: 14px; }
   .visor-pdf-modal { min-height: 56vh; }
   .pie-modal {
