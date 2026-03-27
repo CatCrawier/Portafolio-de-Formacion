@@ -2,21 +2,21 @@ const certificados = [
   {
     title: "Fundamentos de JavaScript",
     source: "Platzi x CESDE",
-    hours: "Horas no especificadas",
+    hours: "16 horas",
     date: "26 mar 2026",
     file: "Fundamentos_JS.pdf"
   },
   {
-    title: "Jira",
+    title: "Gestion de Proyectos con Jira",
     source: "Platzi x CESDE",
-    hours: "Horas no especificadas",
+    hours: "12 horas",
     date: "26 mar 2026",
     file: "Jira.pdf"
   },
   {
     title: "Programacion Basica",
     source: "Platzi x CESDE",
-    hours: "Horas no especificadas",
+    hours: "29 horas",
     date: "26 mar 2026",
     file: "Programacion_Basica.pdf"
   },
@@ -50,7 +50,7 @@ const certificados = [
   },
   {
     title: "Cátedra Ser Emprendedor",
-    source: "CESDE",
+    source: "CESDE - Escuela Empresarial",
     hours: "12 horas",
     date: "22 mar 2026",
     file: "Catedra.pdf"
