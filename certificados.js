@@ -1,5 +1,12 @@
 const certificados = [
   {
+    title: "Prompt Engineering",
+    source: "Platzi x CESDE",
+    hours: "13 horas",
+    date: "21 abr 2026",
+    file: "Prompt_Engineering.pdf"
+  },
+  {
     title: "Fundamentos de JavaScript",
     source: "Platzi x CESDE",
     hours: "16 horas",
