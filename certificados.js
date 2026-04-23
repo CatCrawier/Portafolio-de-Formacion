@@ -21,6 +21,13 @@ const certificados = [
     file: "Fundamentos_JS.pdf"
   },
   {
+    title: "Responsive Design",
+    source: "Platzi x CESDE",
+    hours: "9 horas",
+    date: "23 abr 2026",
+    file: "Responsive_Design.pdf"
+  },
+  {
     title: "Gestion de Proyectos con Jira",
     source: "Platzi x CESDE",
     hours: "12 horas",
