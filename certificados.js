@@ -1,5 +1,12 @@
 const certificados = [
   {
+    title: "Introduccion a la Inteligencia Artificial",
+    source: "Platzi x CESDE",
+    hours: "4 horas",
+    date: "23 abr 2026",
+    file: "Introduccion_IA.pdf"
+  },
+  {
     title: "Prompt Engineering",
     source: "Platzi x CESDE",
     hours: "13 horas",
