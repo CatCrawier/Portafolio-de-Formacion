@@ -7,6 +7,13 @@ const certificados = [
     file: "Introduccion_IA.pdf"
   },
   {
+    title: "Fundamentos de Base de Datos de SQL",
+    source: "Platzi x CESDE",
+    hours: "12 horas",
+    date: "30 abr 2026",
+    file: "SQL.pdf"
+  },
+  {
     title: "Prompt Engineering",
     source: "Platzi x CESDE",
     hours: "13 horas",
