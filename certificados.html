@@ -19,7 +19,7 @@
     <div class="divisor"></div>
   </header>
 
-  <main>
+  <main aria-label="Galería de certificados">
     <div class="rejilla" id="galeria"></div>
   </main>
 
@@ -29,6 +29,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="titulo-modal"
+    inert
   >
     <div class="contenido-modal">
       <div class="encabezado-modal">
@@ -42,9 +43,22 @@
       </div>
 
       <div class="cuerpo-modal">
+        <div class="cargando-modal" id="cargando-modal" hidden aria-live="polite" aria-label="Cargando certificado">
+          <div class="spinner"></div>
+          <span>Cargando…</span>
+        </div>
+        <div class="error-modal" id="error-modal" hidden aria-live="polite">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>No se pudo cargar el certificado.</span>
+        </div>
         <iframe
           id="pdf-modal"
           class="visor-pdf visor-pdf-modal"
+          src="about:blank"
           title="Vista previa del certificado"
           loading="lazy"
         ></iframe>
@@ -64,6 +78,11 @@
     </div>
   </div>
 
+  <noscript>
+    <p style="text-align:center;padding:60px 20px;font-family:sans-serif;color:#7a7a8c;">
+      Este portafolio requiere JavaScript para funcionar. Por favor, actívalo en tu navegador.
+    </p>
+  </noscript>
   <script src="certificados.js"></script>
 </body>
 </html>
