@@ -64,6 +64,14 @@ header h1 {
   font-weight: 300;
 }
 
+.total-horas {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
 .divisor {
   width: 48px;
   height: 2px;
@@ -94,17 +102,27 @@ header h1 {
   outline: none;
 }
 
-.tarjeta:nth-child(1) { animation-delay: 0.05s; }
-.tarjeta:nth-child(2) { animation-delay: 0.10s; }
-.tarjeta:nth-child(3) { animation-delay: 0.15s; }
-.tarjeta:nth-child(4) { animation-delay: 0.20s; }
-.tarjeta:nth-child(5) { animation-delay: 0.25s; }
-.tarjeta:nth-child(6) { animation-delay: 0.30s; }
-.tarjeta:nth-child(7) { animation-delay: 0.35s; }
+/* Delays para las 16 tarjetas */
+.tarjeta:nth-child(1)  { animation-delay: 0.05s; }
+.tarjeta:nth-child(2)  { animation-delay: 0.10s; }
+.tarjeta:nth-child(3)  { animation-delay: 0.15s; }
+.tarjeta:nth-child(4)  { animation-delay: 0.20s; }
+.tarjeta:nth-child(5)  { animation-delay: 0.25s; }
+.tarjeta:nth-child(6)  { animation-delay: 0.30s; }
+.tarjeta:nth-child(7)  { animation-delay: 0.35s; }
+.tarjeta:nth-child(8)  { animation-delay: 0.40s; }
+.tarjeta:nth-child(9)  { animation-delay: 0.45s; }
+.tarjeta:nth-child(10) { animation-delay: 0.50s; }
+.tarjeta:nth-child(11) { animation-delay: 0.55s; }
+.tarjeta:nth-child(12) { animation-delay: 0.60s; }
+.tarjeta:nth-child(13) { animation-delay: 0.65s; }
+.tarjeta:nth-child(14) { animation-delay: 0.70s; }
+.tarjeta:nth-child(15) { animation-delay: 0.75s; }
+.tarjeta:nth-child(16) { animation-delay: 0.80s; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .tarjeta:hover,
@@ -191,24 +209,25 @@ header h1 {
   color: var(--accent);
 }
 
+/* Modal: visibilidad con opacity para que la animación de salida funcione */
 .superposicion-modal {
-  display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(10px);
   z-index: 1000;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  animation: fadeIn 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.superposicion-modal.open { display: flex; }
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.superposicion-modal.open {
+  opacity: 1;
+  visibility: visible;
 }
 
 .contenido-modal {
@@ -221,13 +240,15 @@ header h1 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
   box-shadow: var(--shadow);
 }
 
-@keyframes popIn {
-  from { transform: scale(0.92); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.superposicion-modal.open .contenido-modal {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .encabezado-modal {
@@ -261,7 +282,8 @@ header h1 {
   border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--text);
-  font-size: 14px;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -297,7 +319,7 @@ header h1 {
   flex-shrink: 0;
 }
 
-.pie-modal span {
+.pie-modal > span {
   font-size: 12px;
   color: var(--muted);
 }
@@ -307,6 +329,13 @@ header h1 {
   align-items: center;
   gap: 12px;
   margin-left: auto;
+}
+
+.contador-modal {
+  font-size: 12px;
+  color: var(--muted);
+  min-width: 40px;
+  text-align: center;
 }
 
 .boton-enlace,

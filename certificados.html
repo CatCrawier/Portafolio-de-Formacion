@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="Adrian Vasquez Perez" />
+  <meta name="description" content="Portafolio de formación de Adrián Vásquez Pérez — 16 certificados de cursos completados en 2026 a través de Platzi x CESDE y CESDE Escuela Empresarial." />
   <title>Certificados - Adrián Vásquez Pérez</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23c8a96e'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='700' fill='%230d0d0f'>A</text></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="certificados.css" />
 </head>
@@ -13,19 +15,30 @@
     <p class="etiqueta-encabezado">Portafolio de formación</p>
     <h1>Adrián Vásquez Pérez</h1>
     <p class="subtitulo-encabezado">Certificados de cursos completados - 2026</p>
+    <p class="total-horas" id="total-horas"></p>
     <div class="divisor"></div>
   </header>
 
-  <div class="rejilla" id="galeria"></div>
+  <main>
+    <div class="rejilla" id="galeria"></div>
+  </main>
 
-  <div class="superposicion-modal" id="modal">
+  <div
+    class="superposicion-modal"
+    id="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="titulo-modal"
+  >
     <div class="contenido-modal">
       <div class="encabezado-modal">
         <div class="info-encabezado-modal">
           <div class="fuente-encabezado-modal" id="fuente-modal"></div>
           <div class="titulo-modal" id="titulo-modal"></div>
         </div>
-        <button class="cerrar-modal" type="button" onclick="cerrarModal()" aria-label="Cerrar visor">X</button>
+        <button class="cerrar-modal" id="btn-cerrar" type="button" aria-label="Cerrar visor">
+          &times;
+        </button>
       </div>
 
       <div class="cuerpo-modal">
@@ -40,10 +53,11 @@
       <div class="pie-modal">
         <span id="meta-modal"></span>
         <div class="acciones-modal">
+          <span class="contador-modal" id="contador-modal"></span>
           <a id="descargar-modal" class="boton-enlace" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
           <div class="navegacion-modal">
-            <button class="boton-navegacion" type="button" onclick="navegar(-1)" aria-label="Certificado anterior">&larr;</button>
-            <button class="boton-navegacion" type="button" onclick="navegar(1)" aria-label="Certificado siguiente">&rarr;</button>
+            <button class="boton-navegacion" id="btn-anterior" type="button" aria-label="Certificado anterior">&larr;</button>
+            <button class="boton-navegacion" id="btn-siguiente" type="button" aria-label="Certificado siguiente">&rarr;</button>
           </div>
         </div>
       </div>

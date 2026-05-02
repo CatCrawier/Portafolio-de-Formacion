@@ -1,17 +1,38 @@
 const certificados = [
   {
-    title: "Introduccion a la Inteligencia Artificial",
+    title: "Gestión de Equipos Ágiles",
+    source: "Platzi x CESDE",
+    hours: "10 horas",
+    date: "02 may 2026",
+    file: "Gestion de Equipos Agiles.pdf"
+  },
+  {
+    title: "Java SE: SQL y Bases de Datos",
+    source: "Platzi x CESDE",
+    hours: "15 horas",
+    date: "02 may 2026",
+    file: "Java SE SQL y Bases de Datos.pdf"
+  },
+  {
+    title: "Fundamentos de Bases de Datos y SQL",
+    source: "Platzi x CESDE",
+    hours: "12 horas",
+    date: "30 abr 2026",
+    file: "SQL.pdf"
+  },
+  {
+    title: "Introducción a la Inteligencia Artificial",
     source: "Platzi x CESDE",
     hours: "4 horas",
     date: "23 abr 2026",
     file: "Introduccion_IA.pdf"
   },
   {
-    title: "Fundamentos de Base de Datos de SQL",
+    title: "Responsive Design: Maquetación Mobile First",
     source: "Platzi x CESDE",
-    hours: "12 horas",
-    date: "30 abr 2026",
-    file: "SQL.pdf"
+    hours: "9 horas",
+    date: "23 abr 2026",
+    file: "Responsive_Design.pdf"
   },
   {
     title: "Prompt Engineering",
@@ -28,21 +49,14 @@ const certificados = [
     file: "Fundamentos_JS.pdf"
   },
   {
-    title: "Responsive Design",
-    source: "Platzi x CESDE",
-    hours: "9 horas",
-    date: "23 abr 2026",
-    file: "Responsive_Design.pdf"
-  },
-  {
-    title: "Gestion de Proyectos con Jira",
+    title: "Gestión de Proyectos con Jira",
     source: "Platzi x CESDE",
     hours: "12 horas",
     date: "26 mar 2026",
     file: "Jira.pdf"
   },
   {
-    title: "Programacion Basica",
+    title: "Programación Básica",
     source: "Platzi x CESDE",
     hours: "29 horas",
     date: "26 mar 2026",
@@ -99,21 +113,33 @@ const certificados = [
   }
 ];
 
-let indiceActual = 0;
-const carpetaPDF = "PDF";
+// ── Estado ────────────────────────────────────────────────────────────────────
+const estado = {
+  indiceActual: 0,
+  abierto: false,
+};
 
-const galeria = document.getElementById("galeria");
-const modal = document.getElementById("modal");
-const fuenteModal = document.getElementById("fuente-modal");
-const tituloModal = document.getElementById("titulo-modal");
-const metaModal = document.getElementById("meta-modal");
-const pdfModal = document.getElementById("pdf-modal");
+const CARPETA_PDF = "PDF";
+
+// ── Referencias al DOM ────────────────────────────────────────────────────────
+const galeria        = document.getElementById("galeria");
+const modal          = document.getElementById("modal");
+const fuenteModal    = document.getElementById("fuente-modal");
+const tituloModal    = document.getElementById("titulo-modal");
+const metaModal      = document.getElementById("meta-modal");
+const contadorModal  = document.getElementById("contador-modal");
+const pdfModal       = document.getElementById("pdf-modal");
 const descargarModal = document.getElementById("descargar-modal");
+const btnCerrar      = document.getElementById("btn-cerrar");
+const btnAnterior    = document.getElementById("btn-anterior");
+const btnSiguiente   = document.getElementById("btn-siguiente");
 
-function obtenerRutaPDF(file) {
-  return `${carpetaPDF}/${encodeURIComponent(file)}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
+// ── Utilidades ────────────────────────────────────────────────────────────────
+function rutaPDF(file) {
+  return `${CARPETA_PDF}/${encodeURIComponent(file)}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`;
 }
 
+// ── Galería ───────────────────────────────────────────────────────────────────
 function crearTarjeta(certificado, index) {
   const tarjeta = document.createElement("article");
   tarjeta.className = "tarjeta";
@@ -125,7 +151,7 @@ function crearTarjeta(certificado, index) {
     <div class="marco-miniatura">
       <iframe
         class="visor-pdf visor-pdf-tarjeta"
-        src="${obtenerRutaPDF(certificado.file)}"
+        src="${rutaPDF(certificado.file)}"
         title="${certificado.title}"
         loading="lazy"
       ></iframe>
@@ -142,9 +168,9 @@ function crearTarjeta(certificado, index) {
   `;
 
   tarjeta.addEventListener("click", () => abrirModal(index));
-  tarjeta.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
+  tarjeta.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
       abrirModal(index);
     }
   });
@@ -152,46 +178,88 @@ function crearTarjeta(certificado, index) {
   galeria.appendChild(tarjeta);
 }
 
+// ── Modal ─────────────────────────────────────────────────────────────────────
 function actualizarModal() {
-  const cert = certificados[indiceActual];
-  const rutaPDF = obtenerRutaPDF(cert.file);
+  const cert = certificados[estado.indiceActual];
 
-  fuenteModal.textContent = cert.source;
-  tituloModal.textContent = cert.title;
-  metaModal.textContent = `${cert.hours} - ${cert.date}`;
-  pdfModal.src = rutaPDF;
-  pdfModal.title = cert.title;
-  descargarModal.href = `${carpetaPDF}/${encodeURIComponent(cert.file)}`;
+  fuenteModal.textContent   = cert.source;
+  tituloModal.textContent   = cert.title;
+  metaModal.textContent     = `${cert.hours} · ${cert.date}`;
+  contadorModal.textContent = `${estado.indiceActual + 1} / ${certificados.length}`;
+
+  // Cargar el PDF solo al abrir el modal, no antes
+  pdfModal.src          = rutaPDF(cert.file);
+  pdfModal.title        = cert.title;
+  descargarModal.href   = `${CARPETA_PDF}/${encodeURIComponent(cert.file)}`;
 }
 
 function abrirModal(index) {
-  indiceActual = index;
+  estado.indiceActual = index;
+  estado.abierto = true;
   actualizarModal();
   modal.classList.add("open");
   document.body.style.overflow = "hidden";
+  btnCerrar.focus();
 }
 
 function cerrarModal() {
+  estado.abierto = false;
   modal.classList.remove("open");
-  pdfModal.src = "";
   document.body.style.overflow = "";
+  // Liberar el iframe tras la transición CSS (250ms) para no cortarla
+  setTimeout(() => { pdfModal.src = ""; }, 250);
 }
 
 function navegar(direccion) {
-  indiceActual = (indiceActual + direccion + certificados.length) % certificados.length;
+  estado.indiceActual = (estado.indiceActual + direccion + certificados.length) % certificados.length;
   actualizarModal();
 }
 
+// ── Eventos ───────────────────────────────────────────────────────────────────
+btnCerrar.addEventListener("click", cerrarModal);
+btnAnterior.addEventListener("click", () => navegar(-1));
+btnSiguiente.addEventListener("click", () => navegar(1));
+
+// Cerrar al hacer clic en el fondo del modal
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) cerrarModal();
+});
+
+// Teclado: Escape cierra, flechas navegan
+document.addEventListener("keydown", (e) => {
+  if (!estado.abierto) return;
+  if (e.key === "Escape")     cerrarModal();
+  if (e.key === "ArrowRight") navegar(1);
+  if (e.key === "ArrowLeft")  navegar(-1);
+});
+
+// ── Inicializar galería ───────────────────────────────────────────────────────
 certificados.forEach(crearTarjeta);
 
-document.addEventListener("keydown", (event) => {
-  if (!modal.classList.contains("open")) return;
+// ── Trampa de foco en el modal ────────────────────────────────────────────────
+modal.addEventListener("keydown", (e) => {
+  if (e.key !== "Tab") return;
 
-  if (event.key === "Escape") cerrarModal();
-  if (event.key === "ArrowRight") navegar(1);
-  if (event.key === "ArrowLeft") navegar(-1);
+  const focusables = Array.from(
+    modal.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')
+  ).filter((el) => !el.disabled);
+
+  const primero = focusables[0];
+  const ultimo  = focusables[focusables.length - 1];
+
+  if (e.shiftKey) {
+    if (document.activeElement === primero) {
+      e.preventDefault();
+      ultimo.focus();
+    }
+  } else {
+    if (document.activeElement === ultimo) {
+      e.preventDefault();
+      primero.focus();
+    }
+  }
 });
 
-modal.addEventListener("click", (event) => {
-  if (event.target === modal) cerrarModal();
-});
+// ── Total de horas en el encabezado ──────────────────────────────────────────
+const totalHoras = certificados.reduce((suma, c) => suma + parseInt(c.hours), 0);
+document.getElementById("total-horas").textContent = `${totalHoras} horas de formación en total`;
